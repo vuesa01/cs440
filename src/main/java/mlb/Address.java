@@ -97,6 +97,7 @@ public class Address {
     @Override
     public String toString() {
         // TODO Implement this method
-        throw new NotImplementedException();
+        return this.arena + '\n' + this.street + '\n' + this.city + ", " + this.state + ' ' + this.zip + '\n' + this.phone + '\n' + this.url ;
+        // throw new NotImplementedException();
     }
 }
