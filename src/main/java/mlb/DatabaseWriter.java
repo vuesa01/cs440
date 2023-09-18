@@ -193,7 +193,10 @@ public class DatabaseWriter {
         db_connection.setAutoCommit(false);
         // TODO: Write an SQL statement to insert a new team into a table
         String sql = "INSERT INTO team VALUES (?, ?, ?, ?, ?, ?, ?)";
+        // byte[] allLogos = readLogoFile("data/images/mlb");
         for (Team team : league) {
+            String logoFileName = "./images/mlb/logo_" + team.getAbbreviation().toLowerCase() + ".jpg";
+            byte[] logoData = readLogoFile(logoFileName);
             PreparedStatement statement_prepared = db_connection.prepareStatement(sql);
             // TODO: match parameters of the SQL statement and team id, abbreviation, name, conference, division, and logo
             statement_prepared.setString(2, team.getId());
@@ -201,7 +204,7 @@ public class DatabaseWriter {
             statement_prepared.setString(4, team.getName());
             statement_prepared.setString(5, team.getConference());
             statement_prepared.setString(6, team.getDivision());
-            statement_prepared.setBytes(7, team.getLogo());
+            statement_prepared.setBytes(7, logoData);
             statement_prepared.executeUpdate();
         }
         db_connection.commit();
