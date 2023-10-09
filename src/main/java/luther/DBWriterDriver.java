@@ -3,8 +3,11 @@ package luther;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import com.mysql.cj.x.protobuf.MysqlxDatatypes.Array;
 
 import mlb.DatabaseWriterDriver;
 
@@ -13,6 +16,7 @@ public class DBWriterDriver {
     public static void main(String[] args) throws SQLException, IOException {
         DBWriter dw = new DBWriter();
         String db_filename = "luther.sqlite";
+        int current_year = 2024;
         if (args.length != 0) {
             db_filename = args[0];
         }
@@ -70,6 +74,14 @@ public class DBWriterDriver {
         ArrayList<Enrollment> enrollments = dw.readEnrollmentFromTxt("data/luther/enrollment.txt");
         try {
             dw.writeEnrollmentsTable(db_filename, enrollments);
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseWriterDriver.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            ArrayList<String> seniors = dw.findSeniors(db_filename, current_year);
+            for (String name : seniors) {
+                System.out.println(name); // Tests to see if the view works, it does
+            }
         } catch (SQLException ex) {
             Logger.getLogger(DatabaseWriterDriver.class.getName()).log(Level.SEVERE, null, ex);
         }

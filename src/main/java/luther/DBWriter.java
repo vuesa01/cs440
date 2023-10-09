@@ -34,6 +34,7 @@ import org.jsoup.select.Elements;
 
 import com.github.javafaker.Faker;
 import com.mysql.cj.protocol.Resultset;
+import com.mysql.cj.x.protobuf.MysqlxDatatypes.Array;
 
 import mlb.DatabaseReader;
 import netscape.javascript.JSException;
@@ -108,10 +109,10 @@ public class DBWriter {
             
         statement.executeUpdate("CREATE TABLE section ("
                 + "idpk INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,"
-                + "CourseName INTEGER NOT NULL,"
+                + "CourseNameId INTEGER NOT NULL,"
                 + "Title TEXT NOT NULL,"
                 + "Student TEXT NOT NULL,"
-                + "FOREIGN KEY (CourseName) REFERENCES course(idpk),"
+                + "FOREIGN KEY (CourseNameId) REFERENCES course(idpk),"
                 + "FOREIGN KEY (Student) REFERENCES student(Name));");
                 
         statement.executeUpdate("CREATE TABLE enrollment ("
@@ -164,7 +165,7 @@ public class DBWriter {
 
         for (int i = 0; i < 15; i++) {
             String name = faker.name().fullName();
-            int gradYear = faker.number().numberBetween(2023, 2027);
+            int gradYear = faker.number().numberBetween(2024, 2028);
             int majorId = faker.number().numberBetween(1, 55);
 
             Statement statement = db_connection.createStatement();
@@ -566,4 +567,25 @@ public class DBWriter {
         db_connection.close();
     }
 
+    public ArrayList<String> findSeniors(String db_filename, int gradYear) throws SQLException {
+        Connection db_connection = DriverManager.getConnection(SQLITEDBPATH + db_filename);
+        db_connection.setAutoCommit(false);  
+        ArrayList<String> allSeniors = new ArrayList<>();
+
+        String viewSql = "CREATE VIEW IF NOT EXISTS seniors AS "
+                + "SELECT * FROM student WHERE GradYear = '" + gradYear + "';";
+        PreparedStatement preparedStatement = db_connection.prepareStatement(viewSql);
+        preparedStatement.execute();
+
+        String seniorSql = "SELECT * FROM seniors";
+        Statement statement = db_connection.createStatement();
+        ResultSet results = statement.executeQuery(seniorSql);
+
+        while (results.next()) {
+            allSeniors.add(results.getString("Name"));
+        }
+        return allSeniors;
+    }
+
+    
 }
