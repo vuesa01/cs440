@@ -13,10 +13,13 @@ import mlb.DatabaseWriterDriver;
 
 public class DBWriterDriver {
     
+    private static final int SectionId = 0;
+
     public static void main(String[] args) throws SQLException, IOException {
         DBWriter dw = new DBWriter();
         String db_filename = "luther.sqlite";
         int current_year = 2024;
+        int section_id = 87;
         if (args.length != 0) {
             db_filename = args[0];
         }
@@ -79,7 +82,17 @@ public class DBWriterDriver {
         }
         try {
             ArrayList<String> seniors = dw.findSeniors(db_filename, current_year);
+            System.out.println("\nSenior List:");
             for (String name : seniors) {
+                System.out.println(name); // Tests to see if the view works, it does
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseWriterDriver.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            ArrayList<String> students = dw.findAllStudentsInASection(db_filename, section_id);
+            System.out.println("\nStudents Section List:");
+            for (String name : students) {
                 System.out.println(name); // Tests to see if the view works, it does
             }
         } catch (SQLException ex) {

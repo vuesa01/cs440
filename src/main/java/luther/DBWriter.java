@@ -583,9 +583,30 @@ public class DBWriter {
 
         while (results.next()) {
             allSeniors.add(results.getString("Name"));
-        }
+        }        
+        db_connection.close();
         return allSeniors;
     }
 
-    
+    public ArrayList<String> findAllStudentsInASection(String db_filename, int sectionId) throws SQLException {
+        Connection db_connection = DriverManager.getConnection(SQLITEDBPATH + db_filename);
+        db_connection.setAutoCommit(false);  
+        ArrayList<String> allStudents = new ArrayList<>();
+
+        String viewSql = "CREATE VIEW IF NOT EXISTS students_in_section AS "
+                + "SELECT * FROM section WHERE CourseNameId = '" + sectionId + "';";
+        PreparedStatement preparedStatement = db_connection.prepareStatement(viewSql);
+        preparedStatement.execute();
+
+        String students = "SELECT * FROM students_in_section";
+        Statement statement = db_connection.createStatement();
+        ResultSet results = statement.executeQuery(students);
+
+        while (results.next()) {
+            allStudents.add(results.getString("Student"));
+        }
+        db_connection.close();
+        return allStudents;
+    }
+
 }
