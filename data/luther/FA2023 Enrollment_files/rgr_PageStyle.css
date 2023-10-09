@@ -1,0 +1,90 @@
+body {
+    background: #fefefe;
+    margin-left: 5px;
+    margin-right: 5px;
+    font-family: Helvetica, Verdana, sans-serif;
+}
+
+p,
+td,
+ol,
+ul {
+    font-family: Helvetica, Verdana, sans-serif;
+    font-size: 10px;
+}
+
+th {
+    font-family: Helvetica, Verdana, sans-serif;
+    font-size: 10px;
+}
+
+h1 {
+    font-family: Helvetica, Verdana, sans-serif;
+    font-size: 11px;
+}
+
+h2 {
+    font-family: Helvetica, Verdana, sans-serif;
+    font-size: 12px;
+}
+
+h3 {
+    font-family: Helvetica, Verdana, sans-serif;
+    font-size: 16px;
+}
+
+h4 {
+    font-family: Helvetica, Verdana, sans-serif;
+    font-size: 24px;
+}
+
+div.box {
+    width: 100%;
+    border: solid;
+    border-width: 0.05em;
+    border-color: black
+}
+
+div.boxcolor {
+    background: #efefef;
+    border: solid;
+    border-width: 0.05em;
+    border-color: black
+}
+
+div.messageBox {
+    text-align: justify;
+    width: 70%;
+    font-size: 12px;
+    background: #fafafa;
+    border: solid;
+    border-width: 1px;
+    border-color: #810000;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+div.figure {
+    align-items: center;
+}
+
+a:link {
+    color: #993333;
+}
+
+a:visited {
+    color: #993333;
+}
+
+a:hover {
+    color: #aa3333;
+}
+
+a.plain {
+    text-decoration: none
+}
+
+img[src*='#center'] {
+    display: block;
+    margin: auto;
+}

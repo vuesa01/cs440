@@ -4,6 +4,7 @@ plugins {
 
 repositories {
 	mavenCentral()
+	 maven { url 'https://jitpack.io' }
 }
 
 dependencies {
@@ -32,6 +33,7 @@ dependencies {
 	// https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter
 	testImplementation 'org.junit.jupiter:junit-jupiter:5.10.0'
 	// https://mvnrepository.com/artifact/org.junit/junit-bom
+	implementation "org.apache.pdfbox:pdfbox:2.0.29"
 	// testImplementation 'org.junit:junit-bom:5.10.0'
 	// https://mvnrepository.com/artifact/org.junit.platform/junit-platform-suite-engine
 	testImplementation 'org.junit.platform:junit-platform-suite-engine:1.10.0'

@@ -1,0 +1,12 @@
+BIO-115-A,Human Anatomy,2
+BIO-115-A,Human Anatomy,1
+BIO-115-A,Human Anatomy,14
+CS-440-A,Database Management Syste,4
+CS-440-A,Database Management Syste,5
+CS-440-A,Database Management Syste,7
+ENG-251-A,African-American Literatu,9
+ENG-251-A,African-American Literatu,11
+ENG-251-A,African-American Literatu,12
+HES-100-B03,Lifetime Hlth & Well,3
+HES-100-B03,Lifetime Hlth & Well,15
+HES-100-B03,Lifetime Hlth & Well,8

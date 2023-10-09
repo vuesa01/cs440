@@ -1,6 +1,6 @@
-Baltimore Orioles	Oriole Park	333 West Camden Street	Baltimore	MD	21201	(410) 685-9800	orioles.com
+Baltimore Orioles   Oriole Park 333 West Camden Street	Baltimore	MD	21201	(410) 685-9800	orioles.com
 Boston Red Sox	Fenway Park	4 Yawkey Way	Boston	MA	02215	(617) 267-9440	redsox.com
-Chicago White Sox	Guaranteed Rate Field	333 West 35th Street	Chicago	IL	60616	(312) 674-1000	whitesox.com
+Chicago White Sox   Guaranteed Rate Field	333 West 35th Street	Chicago	IL	60616	(312) 674-1000	whitesox.com
 Cleveland Indians	Progressive Field	2401 Ontario Street	Cleveland	OH	44115	(216) 420-4200	indians.com
 Detroit Tigers	Comerica Park	2100 Woodward Avenue	Detroit	MI	48201	(313) 471-2000	tigers.com
 Houston Astros	Minute Maid Park	501 Crawford Street	Houston	TX	77002	(713) 259-8000	astros.com
