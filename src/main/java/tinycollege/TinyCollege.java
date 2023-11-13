@@ -6,13 +6,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.dizitart.no2.Cursor;
 import org.dizitart.no2.Document;
-import org.dizitart.no2.Filter;
 import org.dizitart.no2.Nitrite;
 import org.dizitart.no2.NitriteCollection;
-import org.dizitart.no2.objects.filters.ObjectFilters;
-
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
 import com.opencsv.exceptions.CsvException;
@@ -53,9 +49,6 @@ public class TinyCollege {
 
             collection.insert(doc);
         }
-    
-        // Document getDocument = collection.find().firstOrDefault();
-        // System.out.println(getDocument.get("Title"));
 
         db.close();
 
@@ -94,9 +87,6 @@ public class TinyCollege {
 
             collection.insert(doc);
         }
-    
-        // Document getDocument = collection.find().firstOrDefault();
-        // System.out.println(getDocument.get("DName"));
 
         db.close();
 
@@ -137,9 +127,6 @@ public class TinyCollege {
 
             collection.insert(doc);
         }
-    
-        // Document getDocument = collection.find().firstOrDefault();
-        // System.out.println(getDocument.get("Grade"));
 
         db.close();
 
@@ -180,9 +167,6 @@ public class TinyCollege {
 
             collection.insert(doc);
         }
-    
-        // Document getDocument = collection.find().firstOrDefault();
-        // System.out.println(getDocument.get("Prof"));
 
         db.close();
 
@@ -223,9 +207,6 @@ public class TinyCollege {
 
             collection.insert(doc);
         }
-    
-        // Document getDocument = collection.find().firstOrDefault();
-        // System.out.println(getDocument.get("SName"));
 
         db.close();
 
@@ -415,7 +396,8 @@ public class TinyCollege {
     }
 
     public static void main(String[] args) {
-        TinyCollege tinyCollege = new TinyCollege();    
+        TinyCollege tinyCollege = new TinyCollege(); 
+
         tinyCollege.initializeCourses();
         tinyCollege.initializeDepartments();
         tinyCollege.initializeEnrollments();
@@ -424,22 +406,31 @@ public class TinyCollege {
 
         System.out.println("==========\nQuery Any Table");
         tinyCollege.queryCollection("Students");
+
         System.out.println("==========\nQuery by Student Majors");
         tinyCollege.queryStudentMajors("Students", "10");
+
         System.out.println("==========\nQuery by Course Title");
         tinyCollege.queryCourseTitle("calculus");
+
         System.out.println("==========\nQuery Enrollments by Grade");
         tinyCollege.queryEnrollmentGrade("A");
-        System.out.println("==========\nQuery Students by Graduation Year");
+
+        System.out.println("==========\nQuery Students who Graduated Before a Graduation Year");
         tinyCollege.queryStudentGradYear(2021);
+
         System.out.println("==========\nQuery Students by Grade");
         tinyCollege.queryEnrollmentGradeForStudent("A");
+        
         System.out.println("==========\nQuery by Courses not Taught by a Professor in the Sections Collection");
         tinyCollege.queryCoursesNotTaught();
+
         System.out.println("==========\nQuery Students by Section");
         tinyCollege.queryStudentsBySection("43");
+
         System.out.println("==========\nQuery for Professors by Department ID");
         tinyCollege.queryProfsByDepartment("10");
+
         System.out.println("==========\nQuery for Students by Professor");
         tinyCollege.queryStudentsByProfessor("turing");
         }
