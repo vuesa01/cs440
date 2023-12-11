@@ -1,0 +1,112 @@
+#+title: Presentation
+#+options: toc:nil text:t
+#+exclude_tags: noexport
+
+* Setup
+
+#+begin_src python :results none :session primary :session-reset yes
+from final import Relation
+
+blank = Relation(filepath="data/BLANK.csv")
+course = Relation(filepath="data/COURSE.csv")
+dept = Relation(filepath="data/DEPT.csv")
+enroll = Relation(filepath="data/ENROLL.csv")
+section = Relation(filepath="data/SECTION.csv")
+student = Relation(filepath="data/STUDENT.csv")
+union1 = Relation(filepath="data/UNION1.csv")
+union2= Relation(filepath="data/UNION2.csv")
+#+end_src
+
+* Examples
+
+** Single-table Operations
+
+*** Project
+
+#+begin_src python :results output :session primary
+student.project(["SId", "SName"]).print()
+#+end_src
+
+*** Rename
+
+#+begin_src python :results output :session primary
+student.rename("SName", "StudentName").print()
+#+end_src
+
+*** Extend
+
+#+begin_src python :results output :session primary
+student.extend("YearsAfterGraduating", "2023 - int(getattr(row, 'GradYear'))").project(
+    ["SId", "SName", "GradYear", "YearsAfterGraduating"]
+).print()
+#+end_src
+
+*** Select / Query
+
+#+begin_src python :results output :session primary
+student.query("MajorId = 10").print()
+#+end_src
+
+*** Sort
+
+#+begin_src python :results output :session primary
+student.sort(["GradYear", "MajorId"], True).print()
+#+end_src
+
+*** GroupBy
+
+#+begin_src python :results output :session primary
+student.groupby(["GradYear"]).count("SName").project(
+    ["GradYear", "count_SName"]
+).print()
+#+end_src
+
+** Multi-table operations
+
+*** Product
+
+#+begin_src python :results output :session primary
+student.product(enroll).head(5).print()
+#+end_src
+
+*** Union
+
+#+begin_src python :results output :session primary
+student.union(student).print()
+#+end_src
+
+#+begin_src python :results output :session primary
+union1.union(union2).print()
+#+end_src
+
+*** Join
+
+#+begin_src python :results output :session primary
+student.join(enroll, "SId == StudentId").print()
+#+end_src
+
+*** SemiJoin
+
+#+begin_src python :results output :session primary
+student.semijoin(enroll, "SId == StudentId").print()
+#+end_src
+
+*** AntiJoin
+
+#+begin_src python :results output :session primary
+student.antijoin(enroll, "SId == StudentId").print()
+#+end_src
+
+*** OuterJoin
+
+#+begin_src python :results output :session primary
+student.outerjoin(enroll, "SId == StudentId").print()
+#+end_src
+
+* Local Variables :noexport:
+
+# Local Variables:
+# eval: (org-babel-remove-result-one-or-many 1000)
+# End:
+
+#  LocalWords:  GroupBy SemiJoin AntiJoin OuterJoin eval

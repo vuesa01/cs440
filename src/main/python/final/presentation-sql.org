@@ -1,0 +1,126 @@
+#+title: Presentation
+#+options: toc:nil text:t
+#+exclude_tags: noexport
+
+* Setup
+
+* Examples
+
+** Single-table Operations
+
+*** Project
+
+#+begin_src sqlite :db data/college.sqlite :header :list
+SELECT SId, SName
+FROM STUDENT;
+#+end_src
+
+*** Rename
+
+#+begin_src sqlite :db data/college.sqlite :header :list
+SELECT SId, SName as StudentName, GradYear, MajorId
+FROM STUDENT;
+#+end_src
+
+*** Extend
+
+#+begin_src sqlite :db data/college.sqlite :header :list
+SELECT SId, SName, GradYear, MajorId, 2023-GradYear as YearsAfterGraduating
+FROM STUDENT;
+#+end_src
+
+*** Select / Query
+
+#+begin_src sqlite :db data/college.sqlite :header :list
+SELECT *
+FROM STUDENT
+WHERE MajorId = 10;
+#+end_src
+
+*** Sort
+
+#+begin_src sqlite :db data/college.sqlite :header :list
+SELECT *
+FROM STUDENT
+ORDER BY GradYear, MajorId;
+#+end_src
+
+*** GroupBy
+
+#+begin_src sqlite :db data/college.sqlite :header :list
+SELECT GradYear, count(SName)
+FROM STUDENT
+GROUP BY GradYear;
+#+end_src
+
+** Multi-table operations
+
+*** Product
+
+#+begin_src sqlite :db data/college.sqlite :header :list
+SELECT *
+FROM STUDENT
+CROSS JOIN ENROLL
+LIMIT 5;
+#+end_src
+
+*** Union
+
+#+begin_src sqlite :db data/college.sqlite :header :list
+SELECT *
+FROM STUDENT s1
+UNION
+SELECT *
+FROM STUDENT s2
+#+end_src
+
+#+begin_src sqlite :db data/college.sqlite :header :list
+SELECT *
+FROM UNION1
+UNION
+SELECT *
+FROM UNION2
+#+end_src
+
+*** Join
+
+#+begin_src sqlite :db data/college.sqlite :header :list
+SELECT *
+FROM STUDENT s
+JOIN ENROLL e ON s.SId = e.StudentId;
+#+end_src
+
+*** SemiJoin
+
+#+begin_src sqlite :db data/college.sqlite :header :list
+SELECT s.SId
+FROM  STUDENT s
+WHERE EXISTS (SELECT 1 FROM ENROLL e
+              WHERE e.StudentId = s.SId);
+#+end_src
+
+*** AntiJoin
+
+#+begin_src sqlite :db data/college.sqlite :header :list
+SELECT *
+FROM STUDENT s
+WHERE NOT EXISTS (SELECT 1
+                  FROM ENROLL e
+                  WHERE e.StudentId = s.SId);
+#+end_src
+
+*** OuterJoin
+
+#+begin_src sqlite :db data/college.sqlite :header :list :nullvalue NULL
+SELECT *
+FROM STUDENT s
+LEFT OUTER JOIN ENROLL e ON s.SId = e.StudentId;
+#+end_src
+
+* Local Variables :noexport:
+
+# Local Variables:
+# eval: (org-babel-remove-result-one-or-many 1000)
+# End:
+
+#  LocalWords:  GroupBy SemiJoin AntiJoin OuterJoin eval
